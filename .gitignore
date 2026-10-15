@@ -1,0 +1,26 @@
+# Local configuration
+config/config.R
+config/config.sh
+
+# Data and results
+*.rds
+*.RData
+*.h5
+*.h5Seurat
+*.mtx
+*.mtx.gz
+*.tsv.gz
+*.bed.gz
+results/
+
+# R
+.Rhistory
+.Rapp.history
+.Rproj.user/
+.Renviron
+Rplots.pdf
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

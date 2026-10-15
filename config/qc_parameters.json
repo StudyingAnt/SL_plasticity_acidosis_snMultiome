@@ -1,0 +1,7 @@
+{
+  "nCount_ATAC": { "min": 1000, "max": 100000 },
+  "nucleosome_signal": { "max": 2 },
+  "TSS_enrichment": { "min": 1 },
+  "nCount_RNA": { "min": 1000, "max": 35000 },
+  "percent_mt": { "max": 20 }
+}

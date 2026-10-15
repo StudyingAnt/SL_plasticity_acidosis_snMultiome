@@ -1,0 +1,6 @@
+# Keep LF line endings so scripts run unchanged on Linux
+* text=auto eol=lf
+*.sh text eol=lf
+*.R text eol=lf
+*.md text eol=lf
+*.json text eol=lf
