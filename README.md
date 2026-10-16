@@ -46,6 +46,8 @@ Rscript 01_metacells/01_build_metacells.R
 bash 02_aracne3/02_run_aracne3.sh
 ```
 
+On a SLURM cluster, steps can be submitted with `bash slurm/submit.sh <step script>` (see [slurm/README.md](slurm/README.md)).
+
 Step 0-2 was run on an HPC cluster (Linux). Steps 1–5 were run on a workstation; ARACNe3 was run under Linux (WSL).
 
 ## Notes
