@@ -1,6 +1,8 @@
-# Local configuration
-config/config.R
-config/config.sh
+# Local configuration (all config/config*.R|sh except the templates)
+config/config*.R
+config/config*.sh
+!config/config.example.R
+!config/config.example.sh
 
 # Data and results
 *.rds

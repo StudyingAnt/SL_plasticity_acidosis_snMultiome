@@ -7,13 +7,15 @@ suppressPackageStartupMessages({
   library(glue)
 })
 
-cfg_file <- file.path("config", "config.R")
+# SNMULT_CONFIG_R can point to another config file (e.g. for a test run)
+cfg_file <- Sys.getenv("SNMULT_CONFIG_R", file.path("config", "config.R"))
 if (!file.exists(cfg_file)) {
   stop(
-    "config/config.R not found. Copy config/config.example.R to config/config.R, ",
+    cfg_file, " not found. Copy config/config.example.R to config/config.R, ",
     "edit the paths, and run scripts from the repository root."
   )
 }
+cat("Config:", cfg_file, "\n")
 source(cfg_file)
 
 # ----------------------------

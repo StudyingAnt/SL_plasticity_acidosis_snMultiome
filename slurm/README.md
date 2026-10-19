@@ -19,4 +19,11 @@ Each step has default resources (CPUs, memory, time) in `submit.sh`. To override
 MEM=200G TIME=12:00:00 bash slurm/submit.sh 00-2_seurat_preprocessing/05_transformations.R
 ```
 
-Logs are written to `LOG_DIR` as `snmult_<step>.<jobid>.out/.err`. Each log records the repository commit that was run.
+Logs are written to `LOG_DIR` as `snmult_<step>.<jobid>.out/.err`. Each log records the repository commit that was run, the config files and the versions of the main R packages.
+
+To run with other config files (for example a test run with its own `RESULTS_DIR`), set `SNMULT_CONFIG_R` and `SNMULT_CONFIG_SH`. `JOB_TAG` is added to the job and log names. Any `config/config*.R` and `config/config*.sh` file is ignored by git.
+
+```bash
+SNMULT_CONFIG_R=config/config.test.R SNMULT_CONFIG_SH=config/config.test.sh JOB_TAG=test \
+  bash slurm/submit.sh 01_metacells/01_build_metacells.R
+```

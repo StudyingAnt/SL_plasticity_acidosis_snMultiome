@@ -8,6 +8,9 @@
 
 RESULTS_DIR="/path/to/work/results"
 
+# Human TF list (same path as HUMAN_TF_FILE in config/config.R)
+HUMAN_TF_FILE="/path/to/TF_names_v_1.01.txt"
+
 # ARACNe3 executable (https://github.com/califano-lab/ARACNe3)
 ARACNE3_BIN="ARACNe3_app_release"
 

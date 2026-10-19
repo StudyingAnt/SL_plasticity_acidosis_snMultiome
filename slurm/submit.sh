@@ -11,17 +11,22 @@
 # Resources below are defaults per step; override with environment variables,
 # e.g.  MEM=200G TIME=12:00:00 bash slurm/submit.sh <step>
 # Partition, log directory and extra sbatch options come from config/config.sh.
+#
+# To use other config files (e.g. a test run with its own results directory):
+#   SNMULT_CONFIG_R=config/config.test.R SNMULT_CONFIG_SH=config/config.test.sh \
+#     JOB_TAG=test bash slurm/submit.sh <step>
 # =============================================================================
 set -euo pipefail
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 cd "${REPO}"
 
-if [ ! -f config/config.sh ]; then
-  echo "config/config.sh not found. Copy config/config.example.sh and edit it." >&2
+CONFIG_SH="${SNMULT_CONFIG_SH:-config/config.sh}"
+if [ ! -f "${CONFIG_SH}" ]; then
+  echo "${CONFIG_SH} not found. Copy config/config.example.sh to config/config.sh and edit it." >&2
   exit 1
 fi
-source config/config.sh
+source "${CONFIG_SH}"
 
 if [ $# -lt 1 ]; then
   echo "Usage: bash slurm/submit.sh <step script> [arguments]" >&2
@@ -53,7 +58,7 @@ CPUS="${CPUS:-${d_cpus}}"
 MEM="${MEM:-${d_mem}}"
 TIME="${TIME:-${d_time}}"
 
-name="snmult_$(basename "${step}" | sed 's/\.[^.]*$//')"
+name="snmult${JOB_TAG:+_${JOB_TAG}}_$(basename "${step}" | sed 's/\.[^.]*$//')"
 mkdir -p "${LOG_DIR}"
 
 # shellcheck disable=SC2086

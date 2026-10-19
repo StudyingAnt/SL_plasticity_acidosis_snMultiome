@@ -2,9 +2,11 @@
 
 ## Regulator list
 
-The regulators are human transcription factors from the Human TFs database v1.01 (Lambert *et al.*, 2018). Download `TF_names_v_1.01.txt` from https://humantfs.ccbr.utoronto.ca/download.php and set `HUMAN_TF_FILE` in `config/config.R`.
+The regulators are human transcription factors from the Human TFs database v1.01 (Lambert *et al.*, 2018; https://humantfs.ccbr.utoronto.ca).
 
-`01_prepare_regulators.R` keeps only the TFs present in the metacell CPM matrix and writes `regulators_in_matrix.txt`.
+1. Set `HUMAN_TF_FILE` in both `config/config.R` and `config/config.sh`.
+2. Run `00_download_human_tfs.sh`. It downloads `TF_names_v_1.01.txt` (1,639 TFs) to that path and compares its SHA-256 checksum with the file used in the paper.
+3. Run `01_prepare_regulators.R`. It keeps only the TFs present in the metacell CPM matrix and writes `regulators_in_matrix.txt`.
 
 ## ARACNe3
 
@@ -19,6 +21,7 @@ ARACNe3 (https://github.com/califano-lab/ARACNe3) is run on the metacell CPM mat
 | `--runid` | `mcf7_metacell` |
 
 ```bash
+bash 02_aracne3/00_download_human_tfs.sh
 Rscript 02_aracne3/01_prepare_regulators.R
 bash 02_aracne3/02_run_aracne3.sh
 ```

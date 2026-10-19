@@ -11,7 +11,7 @@
 # =============================================================================
 set -euo pipefail
 
-source config/config.sh
+source "${SNMULT_CONFIG_SH:-config/config.sh}"
 
 ARACNe3_OUT="${RESULTS_DIR}/02_aracne3"
 mkdir -p "${ARACNe3_OUT}"

@@ -10,7 +10,7 @@ set -eo pipefail
 # slurm/submit.sh submits from the repository root
 cd "${SLURM_SUBMIT_DIR}"
 
-source config/config.sh
+source "${SNMULT_CONFIG_SH:-config/config.sh}"
 
 # R environment (conda R + project R library)
 if [ -n "${CONDA_MODULE:-}" ]; then
@@ -26,6 +26,7 @@ shift
 echo "=== job ${SLURM_JOB_ID} on $(hostname) | $(date)"
 echo "=== repo commit: $(git rev-parse --short HEAD 2>/dev/null || echo unknown)"
 echo "=== step: ${step} $*"
+echo "=== config: ${SNMULT_CONFIG_R:-config/config.R} | ${SNMULT_CONFIG_SH:-config/config.sh}"
 echo "=== CPUs: ${SLURM_CPUS_PER_TASK:-?}  memory: ${SLURM_MEM_PER_NODE:-?} MB"
 
 case "${step}" in
