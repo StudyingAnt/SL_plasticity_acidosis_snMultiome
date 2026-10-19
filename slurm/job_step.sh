@@ -36,5 +36,10 @@ esac
 
 echo "=== finished $(date)"
 if [[ "${step}" == *.R ]]; then
-  Rscript -e 'sessionInfo()'
+  Rscript -e '
+pk <- c("Seurat", "SeuratObject", "Signac", "sctransform", "glmGamPoi", "chromVAR", "motifmatchr",
+        "JASPAR2024", "TFBSTools", "hdWGCNA", "viper", "genefilter", "data.table", "ggplot2", "Matrix")
+cat(R.version.string, "\n")
+for (p in pk) cat(sprintf("%-14s %s\n", p, tryCatch(as.character(packageVersion(p)), error = function(e) "not installed")))
+'
 fi
