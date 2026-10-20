@@ -2,14 +2,20 @@
 # 06. ACDC-style grid search clustering (Leiden; k = 11..101, resolution =
 #     0.1..1.9) on pca.sct and peaks.lsi, selecting the parameters with the
 #     highest mean per-cluster silhouette width.
-# Usage: Rscript 00-2_seurat_preprocessing/06_clustering_acdc.R \n#          -i <SEURAT_DIR>/all_qc_noMT_macs3_trf.rds
+# Usage: Rscript 00-2_seurat_preprocessing/06_clustering_acdc.R \
+#          -i <SEURAT_DIR>/all_qc_noMT_macs3_trf.rds
 # Output: <SEURAT_DIR>/<name>_qc_noMT_macs3_trf_clust.rds
 # =============================================================================
 
 source(file.path("00-2_seurat_preprocessing", "00_setup.R"))
 suppressMessages({
   library(cluster)
+  library(future)
 })
+
+# Same limit as in 05_transformations.R; FindNeighbors exports ~700 MiB to
+# future workers for the merged object (size limit only, no effect on results)
+options(future.globals.maxSize = 10 * 1024^3)
 
 # Parse CLI args (base R)
 args <- commandArgs(trailingOnly = TRUE)
