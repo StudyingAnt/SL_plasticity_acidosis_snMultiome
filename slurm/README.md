@@ -16,7 +16,7 @@ bash slurm/submit.sh 00-2_seurat_preprocessing/01_make_objects.R
 Each step has default resources (CPUs, memory, time) in `submit.sh`. To override them:
 
 ```bash
-MEM=200G TIME=12:00:00 bash slurm/submit.sh 00-2_seurat_preprocessing/05_transformations.R
+MEM=200G TIME=12:00:00 PARTITION=long-96core-shared bash slurm/submit.sh 00-2_seurat_preprocessing/05_transformations.R
 ```
 
 Logs are written to `LOG_DIR` as `snmult_<step>.<jobid>.out/.err`. Each log records the repository commit that was run, the config files and the versions of the main R packages.
