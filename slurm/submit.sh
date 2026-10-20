@@ -9,7 +9,7 @@
 #   bash slurm/submit.sh 00-2_seurat_preprocessing/06_clustering_acdc.R -i /path/all_qc_noMT_macs3_trf.rds
 #
 # Resources below are defaults per step; override with environment variables,
-# e.g.  MEM=200G TIME=12:00:00 bash slurm/submit.sh <step>
+# e.g.  MEM=200G TIME=12:00:00 PARTITION=long-96core-shared bash slurm/submit.sh <step>
 # Partition, log directory and extra sbatch options come from config/config.sh.
 #
 # To use other config files (e.g. a test run with its own results directory):
@@ -68,7 +68,7 @@ mkdir -p "${LOG_DIR}"
 # shellcheck disable=SC2086
 jobid=$(sbatch --parsable \
   --job-name="${name}" \
-  --partition="${SLURM_PARTITION}" \
+  --partition="${PARTITION:-${SLURM_PARTITION}}" \
   --nodes=1 --ntasks=1 \
   --cpus-per-task="${CPUS}" \
   --mem="${MEM}" \
