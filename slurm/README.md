@@ -27,3 +27,10 @@ To run with other config files (for example a test run with its own `RESULTS_DIR
 SNMULT_CONFIG_R=config/config.test.R SNMULT_CONFIG_SH=config/config.test.sh JOB_TAG=test \
   bash slurm/submit.sh 01_metacells/01_build_metacells.R
 ```
+
+To chain steps, pass the job id of the previous step with `AFTER`; the next job starts only if that job finished successfully. `submit.sh` prints the new job id on its last line:
+
+```bash
+j1=$(bash slurm/submit.sh 03_viper/03_metacell_embeddings.R | tail -1)
+AFTER=$j1 bash slurm/submit.sh 03_viper/04_attach_chromvar.R
+```

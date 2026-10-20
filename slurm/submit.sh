@@ -15,6 +15,10 @@
 # To use other config files (e.g. a test run with its own results directory):
 #   SNMULT_CONFIG_R=config/config.test.R SNMULT_CONFIG_SH=config/config.test.sh \
 #     JOB_TAG=test bash slurm/submit.sh <step>
+#
+# To start a step only after another job finished successfully:
+#   AFTER=<jobid> bash slurm/submit.sh <step>
+# The new job id is printed on the last line (used for chaining).
 # =============================================================================
 set -euo pipefail
 
@@ -47,10 +51,10 @@ case "${step}" in
   00-2_seurat_preprocessing/05_transformations.R)    res="8  240G 24:00:00" ;;
   00-2_seurat_preprocessing/06_clustering_acdc.R)    res="4  200G 24:00:00" ;;
   00-2_seurat_preprocessing/07_run_chromvar.R)       res="8  200G 24:00:00" ;;
-  01_metacells/01_build_metacells.R)                 res="4  200G 12:00:00" ;;
+  01_metacells/01_build_metacells.R)                 res="4  150G 12:00:00" ;;
   02_aracne3/01_prepare_regulators.R)                res="1  16G  01:00:00" ;;
   02_aracne3/02_run_aracne3.sh)                      res="8  64G  24:00:00" ;;
-  03_viper/04_attach_chromvar.R)                     res="2  200G 08:00:00" ;;
+  03_viper/04_attach_chromvar.R)                     res="2  150G 08:00:00" ;;
   *)                                                 res="4  64G  08:00:00" ;;
 esac
 read -r d_cpus d_mem d_time <<< "${res}"
@@ -62,7 +66,7 @@ name="snmult${JOB_TAG:+_${JOB_TAG}}_$(basename "${step}" | sed 's/\.[^.]*$//')"
 mkdir -p "${LOG_DIR}"
 
 # shellcheck disable=SC2086
-sbatch \
+jobid=$(sbatch --parsable \
   --job-name="${name}" \
   --partition="${SLURM_PARTITION}" \
   --nodes=1 --ntasks=1 \
@@ -71,5 +75,9 @@ sbatch \
   --time="${TIME}" \
   --output="${LOG_DIR}/%x.%j.out" \
   --error="${LOG_DIR}/%x.%j.err" \
+  ${AFTER:+--dependency=afterok:${AFTER}} \
   ${SLURM_EXTRA_ARGS:-} \
-  slurm/job_step.sh "$@"
+  slurm/job_step.sh "$@")
+
+echo "Submitted ${name} as job ${jobid}${AFTER:+ (runs after ${AFTER} succeeds)}"
+echo "${jobid}"
