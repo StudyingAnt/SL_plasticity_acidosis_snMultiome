@@ -86,20 +86,14 @@ p_cell <- ggplot(df, aes(x = condition, y = metabolic_diversity, fill = conditio
     legend.position = "none"
   )
 
+# Figure size as in the published panel (Fig. 6d)
 ggsave(file.path(sub_dir, "diversity_cell_metabolic_violin.svg"),
-       p_cell, width = 3.8, height = 2.6, units = "in", bg = "white")
+       p_cell, width = 1.9, height = 1.8, units = "in", bg = "white")
 ggsave(file.path(sub_dir, "diversity_cell_metabolic_violin.png"),
-       p_cell, width = 3.8, height = 2.6, units = "in", dpi = 600, bg = "white")
+       p_cell, width = 1.9, height = 1.8, units = "in", dpi = 600, bg = "white")
 
-# ---- minimal fix: safe summary table (same info, stable CSV)
-summary_df <- data.frame(
-  condition = levels(df$condition),
-  mean = tapply(df$metabolic_diversity, df$condition, mean, na.rm = TRUE),
-  median = tapply(df$metabolic_diversity, df$condition, median, na.rm = TRUE),
-  stringsAsFactors = FALSE
-)
 write.csv(
-  summary_df,
+  aggregate(metabolic_diversity ~ condition, data = df, FUN = function(x) c(mean=mean(x), median=median(x))),
   file.path(sub_dir, "diversity_cell_metabolic_summary.csv"),
   row.names = FALSE
 )
@@ -166,8 +160,8 @@ p_joint <- ggplot(joint_df, aes(x = condition, y = population_diversity, fill = 
   )
 
 ggsave(file.path(sub_dir, sprintf("diversity_population_joint4D_K%d_bar.svg", K)),
-       p_joint, width = 3.8, height = 2.6, units = "in", bg = "white")
+       p_joint, width = 1.9, height = 1.8, units = "in", bg = "white")
 ggsave(file.path(sub_dir, sprintf("diversity_population_joint4D_K%d_bar.png", K)),
-       p_joint, width = 3.8, height = 2.6, units = "in", dpi = 600, bg = "white")
+       p_joint, width = 1.9, height = 1.8, units = "in", dpi = 600, bg = "white")
 
 cat("Saved metabolic (cell) and population (joint 4D) diversity plots to:", sub_dir, "\n")
