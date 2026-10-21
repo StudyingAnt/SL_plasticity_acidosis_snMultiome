@@ -28,7 +28,7 @@ Downstream steps use `all_qc_noMT_macs3_trf_clust.rds` and `all_qc_noMT_macs3_tr
 
 ## Clustering grid
 
-`06_clustering_acdc.R` takes one object per call (`-i`):
+`06_clustering_acdc.R` takes one object per call (`-i`; default: the merged object `all_qc_noMT_macs3_trf.rds`):
 
 | Parameter | Value |
 |---|---|
@@ -40,9 +40,9 @@ Downstream steps use `all_qc_noMT_macs3_trf_clust.rds` and `all_qc_noMT_macs3_tr
 The selected clusters are stored as `acdc_sct` (RNA) and `acdc_peaks` (ATAC).
 
 ```bash
-Rscript 00-2_seurat_preprocessing/06_clustering_acdc.R -i <SEURAT_DIR>/all_qc_noMT_macs3_trf.rds
+Rscript 00-2_seurat_preprocessing/06_clustering_acdc.R
 ```
 
 ## chromVAR
 
-Motif position frequency matrices come from JASPAR2024 (CORE collection, vertebrates, *Homo sapiens*, latest versions only). Motifs are matched to peaks with BSgenome.Hsapiens.UCSC.hg38.
+Motif position frequency matrices come from JASPAR2024 (CORE collection, vertebrates, *Homo sapiens*, latest versions only). Motifs are matched to peaks with BSgenome.Hsapiens.UCSC.hg38. The random seed is fixed (`set.seed(1234)`) before `RunChromVAR()`, because chromVAR samples background peaks at random (see [NOTES.md](../NOTES.md)).

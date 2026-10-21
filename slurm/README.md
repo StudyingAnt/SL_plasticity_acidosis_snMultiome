@@ -34,3 +34,15 @@ To chain steps, pass the job id of the previous step with `AFTER`; the next job 
 j1=$(bash slurm/submit.sh 03_viper/03_metacell_embeddings.R | tail -1)
 AFTER=$j1 bash slurm/submit.sh 03_viper/04_attach_chromvar.R
 ```
+
+## Whole pipeline
+
+`run_all.sh` submits the steps as one dependency chain:
+
+```bash
+PARTITION_HIMEM=long-96core-shared bash slurm/run_all.sh              # 00-2 step 01 -> Figure 6
+PARTITION_HIMEM=long-96core-shared bash slurm/run_all.sh chromvar     # rerun 00-2 step 07, then 01-05
+bash slurm/run_all.sh metacells                                       # 01-05 from existing 06/07 objects
+```
+
+`PARTITION_HIMEM` is used for 00-2 steps 05-07, which need about 200-240 GB of memory.

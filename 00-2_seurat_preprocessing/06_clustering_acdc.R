@@ -2,8 +2,8 @@
 # 06. ACDC-style grid search clustering (Leiden; k = 11..101, resolution =
 #     0.1..1.9) on pca.sct and peaks.lsi, selecting the parameters with the
 #     highest mean per-cluster silhouette width.
-# Usage: Rscript 00-2_seurat_preprocessing/06_clustering_acdc.R \
-#          -i <SEURAT_DIR>/all_qc_noMT_macs3_trf.rds
+# Usage: Rscript 00-2_seurat_preprocessing/06_clustering_acdc.R [-i <object.rds>]
+#        (default input: <SEURAT_DIR>/all_qc_noMT_macs3_trf.rds)
 # Output: <SEURAT_DIR>/<name>_qc_noMT_macs3_trf_clust.rds
 # =============================================================================
 
@@ -29,8 +29,9 @@ if (length(args) > 0) {
   }
 }
 
+# Default: the merged object used by all downstream steps
 if (is.na(input_rds)) {
-  stop("Missing input. Use: Rscript 00-2_seurat_preprocessing/06_clustering_acdc.R -i /path/to/sample.rds")
+  input_rds <- file.path(seurat_dir, "all_qc_noMT_macs3_trf.rds")
 }
 
 obj_file <- input_rds

@@ -74,6 +74,10 @@ cat(glue(
 
 cat(glue("[all] Running chromVAR on peaks assay...\n"))
 
+# chromVAR samples background peaks at random; fix the seed so reruns give
+# identical deviations (the run for the paper had no seed, see NOTES.md)
+set.seed(1234)
+
 obj <- RunChromVAR(
   object = obj,
   genome = BSgenome.Hsapiens.UCSC.hg38,
