@@ -26,3 +26,6 @@ Rplots.pdf
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# ARACNe3 null-model cache
+.ARACNe3_cached/
