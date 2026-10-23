@@ -13,7 +13,7 @@ This repository contains the scripts for the single-nucleus multi-omics analysis
 
 ## Paper
 
-Chalar R., Khatri N., Obeid J., Song J.-H., *et al.* Metabolic plasticity enables cancer adaptation to acidosis in tumor ecosystems. *(under revision)*. See [CITATION.cff](CITATION.cff).
+Chalar R., Khatri N., Obeid J., Song J.-H., *et al.* Metabolic plasticity enables cancer adaptation to acidosis in tumor ecosystems. *bioRxiv* (2026). [doi:10.64898/2026.01.14.699600](https://doi.org/10.64898/2026.01.14.699600). See [CITATION.cff](CITATION.cff).
 
 ## Start here
 
