@@ -38,8 +38,9 @@ umaps <- c(rna = "rna.sct.umap", atac = "peaks.umap", wnn = "mm.sct.peaks.umap")
 titles <- c(rna = "RNA (SCT)", atac = "ATAC (peaks LSI)", wnn = "WNN (RNA + ATAC)")
 
 for (nm in names(umaps)) {
-  p <- DimPlot(obj, reduction = umaps[[nm]], group.by = "condition",
-               pt.size = 0.05, raster = TRUE, raster.dpi = c(1200, 1200)) +
+  # raster: pt.size is in pixels of the raster.dpi grid; shuffle so no condition is drawn on top
+  p <- DimPlot(obj, reduction = umaps[[nm]], group.by = "condition", shuffle = TRUE, seed = 1234,
+               pt.size = 1.6, raster = TRUE, raster.dpi = c(800, 800)) +
     scale_color_manual(values = CONDITION_COLORS, breaks = CONDITION_LEVELS, drop = FALSE) +
     labs(title = titles[[nm]], x = "UMAP_1", y = "UMAP_2", color = "Condition") +
     theme_classic(base_size = 7) +
@@ -109,13 +110,16 @@ cat("  ... with a JASPAR motif:", paste(n_motif$axis, n_motif$N, collapse = ", "
 hm[, label := paste0(regulator, " (", motif_id, ")")]
 hm[, condition := factor(condition, levels = CONDITION_LEVELS)]
 hm[, axis := factor(axis, levels = c("S1P", "GSL", "C1P", "SM"))]
-ord <- unique(hm[order(axis, regulator, motif_id), .(axis, label)])
-hm[, label := factor(label, levels = rev(unique(ord$label)))]
+# y key is unique per axis, so a regulator shared by several axes is sorted within each panel
+hm[, row_key := paste(axis, label, sep = "|")]
+ord <- unique(hm[order(axis, regulator, motif_id), row_key])
+hm[, row_key := factor(row_key, levels = rev(ord))]
 lim <- max(abs(hm$mean_deviation), na.rm = TRUE)
 
-p_hm <- ggplot(hm, aes(x = condition, y = label, fill = mean_deviation)) +
+p_hm <- ggplot(hm, aes(x = condition, y = row_key, fill = mean_deviation)) +
   geom_tile(color = "white", linewidth = 0.2) +
   facet_grid(axis ~ ., scales = "free_y", space = "free_y") +
+  scale_y_discrete(labels = function(x) sub("^[^|]*\\|", "", x)) +
   scale_fill_gradient2(low = "#2166AC", mid = "white", high = "#B2182B", midpoint = 0,
                        limits = c(-lim, lim), name = "Mean chromVAR\ndeviation (z)") +
   labs(x = NULL, y = NULL) +
@@ -125,6 +129,6 @@ p_hm <- ggplot(hm, aes(x = condition, y = label, fill = mean_deviation)) +
         strip.text.y = element_text(size = 7, angle = 0),
         legend.title = element_text(size = 6), legend.text = element_text(size = 6))
 
-h <- max(2.5, 0.09 * length(unique(hm$label)) + 0.8)
+h <- max(2.5, 0.09 * length(unique(hm$row_key)) + 0.8)
 save_plot_pair(p_hm, "chromvar_candidate_regulators_heatmap", out_dir, w = 3.0, h = h)
 cat("Saved figures to", out_dir, "\n")
