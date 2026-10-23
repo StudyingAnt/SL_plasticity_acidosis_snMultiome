@@ -29,12 +29,19 @@ R 4.5.2 from conda ([r452.yml](r452.yml)); R packages from Bioconductor 3.22 / C
 
 ## Setup
 
+Create the environments outside the repository (e.g. in `/path/to/envs`):
+
 ```bash
-conda env create -p envs/r452 -f env/r452.yml
-conda env create -p envs/macs3 -f env/macs3.yml
-conda activate envs/r452
-Rscript -e 'renv::restore(lockfile = "env/renv.lock", prompt = FALSE)'
+conda env create -p /path/to/envs/r452 -f env/r452.yml
+conda env create -p /path/to/envs/macs3 -f env/macs3.yml
+mkdir -p /path/to/envs/r452_renv && cp env/renv.lock /path/to/envs/r452_renv/
+conda activate /path/to/envs/r452
+cd /path/to/envs/r452_renv
+Rscript -e 'renv::init(bare = TRUE, restart = FALSE); renv::restore(lockfile = "renv.lock", prompt = FALSE)'
+Rscript -e 'source("renv/activate.R"); cat(.libPaths()[1], "\n")'   # -> R_LIBRARY in config/config.sh
 ```
+
+`renv.lock` records 304 packages (R 4.5.2, Bioconductor 3.22), including the hdWGCNA GitHub commit.
 
 If an R package fails to compile against conda headers, pointing `CPATH` at the conda include directories helps, e.g. `export CPATH=$CONDA_PREFIX/include/freetype2:$CONDA_PREFIX/include`.
 
