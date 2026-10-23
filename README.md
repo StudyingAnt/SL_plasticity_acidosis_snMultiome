@@ -33,6 +33,7 @@ Chalar R., Khatri N., Obeid J., Song J.-H., *et al.* Metabolic plasticity enable
 | 3 | [03_viper](03_viper) | Regulon, VIPER activity, metacell UMAPs, metacell chromVAR | 6a |
 | 4 | [04_sphingolipid_axes](04_sphingolipid_axes) | Regulatory pressure on four ceramide clearance axes, dominant axis, metabolic diversity | 6b–e |
 | 5 | [05_axis_regulators](05_axis_regulators) | msVIPER candidate regulators per axis with network linkage and motif support | 6f–i |
+| 6 | [06_extended_data_atac](06_extended_data_atac) | RNA/ATAC/WNN UMAPs by condition, chromVAR deviations of the candidate regulators | Extended Data |
 
 Example:
 
@@ -54,7 +55,7 @@ The full pipeline was rerun from the Cell Ranger ARC outputs in a separate envir
 ```
 00-1_cellranger_arc/      Cell Ranger ARC (samples.csv, libraries/, run script, author_hpc/)
 00-2_seurat_preprocessing/
-01_metacells/  02_aracne3/  03_viper/  04_sphingolipid_axes/  05_axis_regulators/
+01_metacells/  02_aracne3/  03_viper/  04_sphingolipid_axes/  05_axis_regulators/  06_extended_data_atac/
 R/common.R                shared settings (samples, colors, axis gene sets, output folders)
 config/                   config templates and QC thresholds
 slurm/                    SLURM submission (submit.sh, run_all.sh)

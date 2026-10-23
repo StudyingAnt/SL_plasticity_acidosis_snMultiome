@@ -55,6 +55,7 @@ case "${step}" in
   02_aracne3/01_prepare_regulators.R)                res="1  16G  01:00:00" ;;
   02_aracne3/02_run_aracne3.sh)                      res="8  64G  24:00:00" ;;
   03_viper/04_attach_chromvar.R)                     res="2  150G 08:00:00" ;;
+  06_extended_data_atac/01_plot_atac_overview.R)     res="2  150G 04:00:00" ;;
   *)                                                 res="4  64G  08:00:00" ;;
 esac
 read -r d_cpus d_mem d_time <<< "${res}"
