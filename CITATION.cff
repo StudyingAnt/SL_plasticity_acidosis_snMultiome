@@ -1,0 +1,60 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the article below."
+title: "SL_plasticity_acidosis_snMultiome: single-nucleus multiome analysis of sphingolipid metabolic plasticity under acidosis"
+type: software
+authors:
+  - family-names: Song
+    given-names: Joon-Hyun
+    affiliation: "Stony Brook University"
+  - family-names: Damaghi
+    given-names: Mehdi
+    affiliation: "Stony Brook University"
+repository-code: "https://github.com/StudyingAnt/SL_plasticity_acidosis_snMultiome"
+license: MIT
+preferred-citation:
+  type: article
+  title: "Metabolic plasticity enables cancer adaptation to acidosis in tumor ecosystems"
+  authors:
+    - family-names: Chalar
+      given-names: Raafat
+    - family-names: Khatri
+      given-names: Naheel
+    - family-names: Obeid
+      given-names: Jowana
+    - family-names: Song
+      given-names: Joon-Hyun
+    - family-names: Xiao
+      given-names: Yujie
+    - family-names: Samad
+      given-names: Saiful
+    - family-names: Chen
+      given-names: Andrew
+    - family-names: Resnick
+      given-names: Andrew
+    - family-names: Karbalaei
+      given-names: Khadijeh
+    - family-names: Ghandour
+      given-names: Botheina
+    - family-names: Allopenna
+      given-names: Janet J.
+    - family-names: Medatwal
+      given-names: Nihal
+    - family-names: Mao
+      given-names: Cungui
+    - family-names: Clarke
+      given-names: Christopher
+    - family-names: Velazquez
+      given-names: Fabiola
+    - family-names: Chen
+      given-names: Bo
+    - family-names: Luberto
+      given-names: Chiara
+    - family-names: Canal
+      given-names: Daniel
+    - family-names: Hannun
+      given-names: Yusuf
+    - family-names: Damaghi
+      given-names: Mehdi
+  journal: "bioRxiv"
+  year: 2026
+  doi: "10.1101/XXXX.XX.XX.XXXXXX"

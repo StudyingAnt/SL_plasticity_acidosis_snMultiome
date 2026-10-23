@@ -1,0 +1,5 @@
+sample	slurm_job_id	cellranger_arc	node	cpus	localmem_gb	start	end	status	exit_code	output_transfer_verification
+ct74	2301810	cellranger-arc-2.0.2	dn035	16	64	2026-10-15T16:17:31-04:00	2026-10-16T00:31:38-04:00	success	0	no differences
+ct65	2301811	cellranger-arc-2.0.2	dn035	16	64	2026-10-15T16:17:32-04:00	2026-10-16T00:43:43-04:00	success	0	no differences
+aa65	2301809	cellranger-arc-2.0.2	dn035	16	64	2026-10-16T00:43:46-04:00	2026-10-16T08:37:48-04:00	success	0	no differences
+aa74	2302737	cellranger-arc-2.0.2	dn035	16	64	2026-10-16T00:31:44-04:00	2026-10-16T09:07:07-04:00	success	0	no differences

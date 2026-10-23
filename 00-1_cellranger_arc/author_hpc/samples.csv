@@ -1,0 +1,5 @@
+sample_id,original_name,cell_population,ph,gex_id,atac_id,gex_index,condition_label
+ct74,MCF Ctrl pH 7.4,Ctrl,7.4,SC60_1G,SC60_1A,SI-TT-C6,Control
+ct65,MCF Ctrl pH 6.5,Ctrl,6.5,SC60_2G,SC60_2A,SI-TT-C7,Acute
+aa74,MCF AA pH 7.4,AA,7.4,SC60_3G,SC60_3A,SI-TT-C8,Return
+aa65,MCF AA pH 6.5,AA,6.5,SC60_4G,SC60_4A,SI-TT-C9,Chronic

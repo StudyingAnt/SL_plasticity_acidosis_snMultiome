@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This repository contains the scripts used for the single-nuclei multi-omics (10x Multiome, snRNA + snATAC) analysis in the paper below (Figure 6 and the corresponding Methods sections). MCF7 cells were profiled under four conditions:
+This repository contains the scripts for the single-nucleus multi-omics analysis (10x Genomics Multiome, joint snRNA-seq + snATAC-seq) in the paper below: Figure 6 and the corresponding Methods. MCF7 cells were profiled under four conditions:
 
 | Sample | Condition | Description |
 |---|---|---|
@@ -13,46 +13,53 @@ This repository contains the scripts used for the single-nuclei multi-omics (10x
 
 ## Paper
 
-Chalar R., Khatri N., Obeid J., Song J.-H., *et al.* Metabolic plasticity enables cancer adaptation to acidosis in tumor ecosystems. *(under revision)*
+Chalar R., Khatri N., Obeid J., Song J.-H., *et al.* Metabolic plasticity enables cancer adaptation to acidosis in tumor ecosystems. *(under revision)*. See [CITATION.cff](CITATION.cff).
 
-## Data availability
+## Start here
 
-Raw and processed sequencing data: *(accession to be added)*
+1. **Data:** raw FASTQ and processed Cell Ranger ARC files are in GEO ([DATA_AVAILABILITY.md](DATA_AVAILABILITY.md)).
+2. **Environment:** see [env/README.md](env/README.md).
+3. **Configuration:** copy `config/config.example.R` to `config/config.R` and `config/config.example.sh` to `config/config.sh`, then edit the paths. Keep results outside the repository.
+4. **Run:** run the steps below in order, from the repository root. Each folder's README lists inputs, outputs, parameters and expected results.
 
 ## Pipeline
 
-Each folder has its own README with inputs, outputs and parameters. Run the steps in order.
-
 | Step | Folder | What it does | Figure |
 |---|---|---|---|
-| 0-1 | [00-1_cellranger_arc](00-1_cellranger_arc) | FASTQ → Cell Ranger ARC (GRCh38) | – |
+| 0-1 | [00-1_cellranger_arc](00-1_cellranger_arc) | FASTQ → Cell Ranger ARC 2.0.2 (GRCh38) | – |
 | 0-2 | [00-2_seurat_preprocessing](00-2_seurat_preprocessing) | Seurat/Signac objects, QC, MACS3 peaks, SCT/LSI/WNN, ACDC clustering, chromVAR | – |
 | 1 | [01_metacells](01_metacells) | hdWGCNA metacells (k = 25), metacell CPM matrix | – |
-| 2 | [02_aracne3](02_aracne3) | TF regulatory network with ARACNe3 | – |
+| 2 | [02_aracne3](02_aracne3) | Human TF list, TF regulatory network with ARACNe3 | – |
 | 3 | [03_viper](03_viper) | Regulon, VIPER activity, metacell UMAPs, metacell chromVAR | 6a |
-| 4 | [04_sphingolipid_axes](04_sphingolipid_axes) | Regulatory pressure on four ceramide clearance axes, dominant axis, metabolic diversity | 6c–f |
-| 5 | [05_axis_regulators](05_axis_regulators) | msVIPER candidate regulators per axis with network linkage and motif support | 6g–j |
+| 4 | [04_sphingolipid_axes](04_sphingolipid_axes) | Regulatory pressure on four ceramide clearance axes, dominant axis, metabolic diversity | 6b–e |
+| 5 | [05_axis_regulators](05_axis_regulators) | msVIPER candidate regulators per axis with network linkage and motif support | 6f–i |
 
-## How to run
-
-1. Install the software listed in [env/README.md](env/README.md).
-2. Copy `config/config.example.R` to `config/config.R` and `config/config.example.sh` to `config/config.sh`, then edit the paths.
-3. Run every script from the repository root, for example:
+Example:
 
 ```bash
+bash 00-1_cellranger_arc/run_cellranger_arc.sh
 Rscript 00-2_seurat_preprocessing/01_make_objects.R
-Rscript 00-2_seurat_preprocessing/06_clustering_acdc.R -i /path/to/seurat_objects/all_qc_noMT_macs3_trf.rds
-Rscript 01_metacells/01_build_metacells.R
-bash 02_aracne3/02_run_aracne3.sh
+...
+Rscript 05_axis_regulators/03_plot_regulator_dotplots.R
 ```
 
-On a SLURM cluster, steps can be submitted with `bash slurm/submit.sh <step script>` (see [slurm/README.md](slurm/README.md)).
+On a SLURM cluster, the whole pipeline can be submitted as one dependency chain with `bash slurm/run_all.sh` (see [slurm/README.md](slurm/README.md)).
 
-Step 0-2 was run on an HPC cluster (Linux). Steps 1–5 were run on a workstation; ARACNe3 was run under Linux (WSL).
+## Reproducibility
 
-## Notes
+The full pipeline was rerun from the Cell Ranger ARC outputs in a separate environment. QC, clustering and metacells were identical to the original analysis, the ARACNe3 network contained all original edges, and every Figure 6 panel was reproduced with the same candidate regulators. Details, and the differences from the original notebooks, are in [NOTES.md](NOTES.md).
 
-The scripts were reorganized from the analysis notebooks used for the paper. Paths were replaced by `config/config.R`, and exploratory code that did not contribute to the paper was removed. Analysis parameters were not changed. Remaining differences are listed in [NOTES.md](NOTES.md).
+## Repository layout
+
+```
+00-1_cellranger_arc/      Cell Ranger ARC (samples.csv, libraries/, run script, author_hpc/)
+00-2_seurat_preprocessing/
+01_metacells/  02_aracne3/  03_viper/  04_sphingolipid_axes/  05_axis_regulators/
+R/common.R                shared settings (samples, colors, axis gene sets, output folders)
+config/                   config templates and QC thresholds
+slurm/                    SLURM submission (submit.sh, run_all.sh)
+env/                      software versions and environment files
+```
 
 ## License
 

@@ -1,5 +1,5 @@
 # =============================================================================
-# 03. Metabolic diversity (Figure 6e, 6f).
+# 03. Metabolic diversity (Figure 6d, 6e).
 #
 #   (A) Per-metacell diversity: softmax (beta = 1) of the four axis pressures,
 #       then Shannon entropy.

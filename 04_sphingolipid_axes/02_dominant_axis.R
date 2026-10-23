@@ -1,5 +1,5 @@
 # =============================================================================
-# 02. Dominant ceramide clearance axis per metacell (Figure 6c, 6d).
+# 02. Dominant ceramide clearance axis per metacell (Figure 6b, 6c).
 #
 #   (1) Threshold diagnostics: 10% / 25% quantiles of
 #         range4  = max - min of the four axis pressures
@@ -434,7 +434,7 @@ cat("Saved signed-pressure UMAP + stacked bars to:", sub_dir, "\n")
 # df was re-ordered by merge() above, so labels are matched to metacells by name.
 # (The original notebook assigned the vector by position,
 #  metacell_obj$dominant4 <- dominant. No figure in this repository uses the
-#  stored dominant4 column; Figure 6c/6d are drawn from df above.)
+#  stored dominant4 column; Figure 6b/6c are drawn from df above.)
 metacell_obj$dominant4 <- setNames(dominant, df$cell)[colnames(metacell_obj)]
 
 out_rds <- file.path(DIR_AXES, "metacell_obj_with_ceramide_axes_scores_domtype.rds")

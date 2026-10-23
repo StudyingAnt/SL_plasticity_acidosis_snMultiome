@@ -1,0 +1,33 @@
+# conda environment providing R 4.5.2 and the system libraries needed to build
+# the R packages from source. R packages are then restored with renv (see env/README.md).
+#   conda env create -p envs/r452 -f env/r452.yml
+name: r452
+channels:
+  - conda-forge
+dependencies:
+  - r-base=4.5.2
+  - r-renv
+  - compilers
+  - make
+  - cmake
+  - pkg-config
+  - git
+  - hdf5
+  - gsl
+  - glpk
+  - libxml2
+  - libxml2-devel
+  - libcurl
+  - openssl
+  - zlib
+  - xz
+  - bzip2
+  - icu
+  - fftw
+  - freetype
+  - fontconfig
+  - harfbuzz
+  - fribidi
+  - libpng
+  - libjpeg-turbo
+  - libtiff

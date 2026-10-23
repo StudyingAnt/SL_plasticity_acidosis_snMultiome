@@ -8,6 +8,14 @@
 
 RESULTS_DIR="/path/to/work/results"
 
+# Cell Ranger ARC (00-1_cellranger_arc/run_cellranger_arc.sh)
+CELLRANGER_ARC="/path/to/cellranger-arc-2.0.2/cellranger-arc"
+ARC_REFERENCE="/path/to/refdata-cellranger-arc-GRCh38-2020-A-2.0.0"
+FASTQ_DIR="/path/to/fastqs"            # contains scRNA/<SC60_xG>/ and scATAC/<SC60_xA>/
+ARC_OUT_DIR="/path/to/cellranger_arc"  # use the same path as DATASET_DIR in config/config.R
+ARC_CORES=16
+ARC_MEM_GB=64
+
 # Human TF list (same path as HUMAN_TF_FILE in config/config.R)
 HUMAN_TF_FILE="/path/to/TF_names_v_1.01.txt"
 

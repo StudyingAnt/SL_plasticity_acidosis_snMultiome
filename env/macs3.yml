@@ -1,0 +1,9 @@
+# MACS3 used by Signac::CallPeaks (00-2 step 03); set MACS3_PATH to <env>/bin/macs3
+#   conda env create -p envs/macs3 -f env/macs3.yml
+name: macs3
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.10.19
+  - macs3=3.0.3

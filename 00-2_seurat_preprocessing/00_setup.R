@@ -32,9 +32,13 @@ cat("seurat_dir:", seurat_dir, "\n")
 # ----------------------------
 # Samples / mapping
 # ----------------------------
+# Accepts both <DATASET_DIR>/<sample>/outs/ (cellranger-arc count output, see
+# 00-1_cellranger_arc) and <DATASET_DIR>/<sample>/ (files placed directly)
 samples <- as_tibble(SAMPLES) |>
   mutate(
-    ess_dir = file.path(DATASET_DIR, sample),
+    ess_dir = ifelse(dir.exists(file.path(DATASET_DIR, sample, "outs")),
+                     file.path(DATASET_DIR, sample, "outs"),
+                     file.path(DATASET_DIR, sample)),
     cnts_h5 = file.path(ess_dir, "filtered_feature_bc_matrix.h5"),
     frags   = file.path(ess_dir, "atac_fragments.tsv.gz")
   )

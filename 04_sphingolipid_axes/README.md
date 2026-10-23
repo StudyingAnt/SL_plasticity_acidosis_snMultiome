@@ -16,8 +16,8 @@ The four axes were manually curated from the KEGG sphingolipid metabolism pathwa
 | Script | Description | Figure |
 |---|---|---|
 | `01_axis_pressure.R` | Regulatory pressure per axis and metacell | – |
-| `02_dominant_axis.R` | Threshold diagnostics, dominant axis assignment, UMAP and proportion bar plots | 6c, 6d |
-| `03_metabolic_diversity.R` | Per-metacell metabolic diversity and population diversity | 6e, 6f |
+| `02_dominant_axis.R` | Threshold diagnostics, dominant axis assignment, UMAP and proportion bar plots | 6b, 6c |
+| `03_metabolic_diversity.R` | Per-metacell metabolic diversity and population diversity | 6d, 6e |
 
 ### Regulatory pressure
 

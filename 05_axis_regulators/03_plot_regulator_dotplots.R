@@ -1,5 +1,5 @@
 # =============================================================================
-# 03. Figure 6g-j: candidate regulators per axis.
+# 03. Figure 6f-i: candidate regulators per axis.
 #     msVIPER padj < 0.05 (full-transcriptome universe); top 20 regulators per
 #     axis by mean -log10(padj) across conditions.
 #     color = NES, size = axis gene linkage, alpha = -log10(motif padj).

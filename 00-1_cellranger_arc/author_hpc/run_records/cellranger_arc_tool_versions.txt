@@ -1,0 +1,5 @@
+cellranger-arc 2.0.2
+Martian runtime v4.0.5
+STAR 2.7.2a
+samtools 1.10
+reference refdata-cellranger-arc-GRCh38-2020-A-2.0.0

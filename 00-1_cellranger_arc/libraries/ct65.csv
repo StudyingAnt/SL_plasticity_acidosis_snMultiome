@@ -1,0 +1,3 @@
+fastqs,sample,library_type
+<FASTQ_DIR>/scRNA/SC60_2G,SC60_2G_CKDL230025676-1A_225YMKLT3,Gene Expression
+<FASTQ_DIR>/scATAC/SC60_2A,SC60_2A_CKDL230025680-1A_225VWWLT3,Chromatin Accessibility

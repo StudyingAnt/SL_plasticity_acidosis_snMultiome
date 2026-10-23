@@ -4,7 +4,7 @@
 |---|---|---|
 | `01_msviper_topbottom.R` | msVIPER for each condition × axis contrast | – |
 | `02_regulon_linkage_motif_support.R` | Adds axis gene linkage and chromVAR motif support | – |
-| `03_plot_regulator_dotplots.R` | Dot plots of candidate regulators | 6g–j |
+| `03_plot_regulator_dotplots.R` | Dot plots of candidate regulators | 6f–i |
 
 ## msVIPER
 
