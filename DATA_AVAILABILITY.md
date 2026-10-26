@@ -2,14 +2,14 @@
 
 ## Sequencing data (GEO)
 
-Raw and processed single-nucleus multiome data for the four conditions are in GEO: **[GSE______](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE______)**.
+Raw and processed single-nucleus multiome data for the four conditions are in GEO: **[GSE352076](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE352076)**.
 
-| GEO sample | Library | Raw files (FASTQ) | Processed files |
-|---|---|---|---|
-| MCF7_Control_GEX / _ATAC | ct74 | SC60_1G (I1, I2, R1, R2) / SC60_1A (I1, R1, R2, R3) | `ct74_filtered_feature_bc_matrix.h5`, `ct74_per_barcode_metrics.csv` / `ct74_atac_fragments.tsv.gz` (+ `.tbi`) |
-| MCF7_Acute_GEX / _ATAC | ct65 | SC60_2G / SC60_2A | `ct65_*` |
-| MCF7_Chronic_GEX / _ATAC | aa65 | SC60_4G / SC60_4A | `aa65_*` |
-| MCF7_Return_GEX / _ATAC | aa74 | SC60_3G / SC60_3A | `aa74_*` |
+| GEO sample | Accession (GEX / ATAC) | Library | Raw files (FASTQ) | Processed files |
+|---|---|---|---|---|
+| MCF7_Control_GEX / _ATAC | GSM10148529 / GSM10148530 | ct74 | SC60_1G (I1, I2, R1, R2) / SC60_1A (I1, R1, R2, R3) | `ct74_filtered_feature_bc_matrix.h5`, `ct74_per_barcode_metrics.csv` / `ct74_atac_fragments.tsv.gz` (+ `.tbi`) |
+| MCF7_Acute_GEX / _ATAC | GSM10148531 / GSM10148532 | ct65 | SC60_2G / SC60_2A | `ct65_*` |
+| MCF7_Chronic_GEX / _ATAC | GSM10148533 / GSM10148534 | aa65 | SC60_4G / SC60_4A | `aa65_*` |
+| MCF7_Return_GEX / _ATAC | GSM10148535 / GSM10148536 | aa74 | SC60_3G / SC60_3A | `aa74_*` |
 
 The processed files are Cell Ranger ARC 2.0.2 outputs, renamed with the sample prefix. To use them instead of rerunning [00-1_cellranger_arc](00-1_cellranger_arc), place them as `<DATASET_DIR>/<sample>/filtered_feature_bc_matrix.h5` and `<DATASET_DIR>/<sample>/atac_fragments.tsv.gz` (+ `.tbi`), and start from [00-2_seurat_preprocessing](00-2_seurat_preprocessing).
 
