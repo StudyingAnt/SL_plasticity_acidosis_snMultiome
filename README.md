@@ -17,7 +17,7 @@ Chalar R., Khatri N., Obeid J., Song J.-H., *et al.* Metabolic plasticity enable
 
 ## Start here
 
-1. **Data:** raw FASTQ and processed Cell Ranger ARC files are in GEO ([DATA_AVAILABILITY.md](DATA_AVAILABILITY.md)).
+1. **Data:** raw FASTQ and processed Cell Ranger ARC files are in GEO ([GSE352076](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE352076)); processed analysis objects are on Zenodo ([10.5281/zenodo.23550814](https://doi.org/10.5281/zenodo.23550814)). See [DATA_AVAILABILITY.md](DATA_AVAILABILITY.md).
 2. **Environment:** see [env/README.md](env/README.md).
 3. **Configuration:** copy `config/config.example.R` to `config/config.R` and `config/config.example.sh` to `config/config.sh`, then edit the paths. Keep results outside the repository.
 4. **Run:** run the steps below in order, from the repository root. Each folder's README lists inputs, outputs, parameters and expected results.
